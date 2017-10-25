@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reviews</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
+    <script src="{% static 'users/javascript/custom.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'users:home' %}">WebSiteName</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                        <li><a href="{% url 'locations:home' %}">Search</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                        {% if User.id != None %}
+                        <li><a class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Host</a>
+                            <span class="caret"></span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                {% if Host %}
+                                <li><a href="{% url 'users:host' %}">Create new listing</a></li>
+                                <li><a href="{% url 'users:listing' User.id %}">My Listings</a></li>
+                                {% else %}
+                                <li><a href="{% url 'users:host' %}">Become a host</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'users:trips' %}">Trips</a></li>
+                        <li><a href="{% url 'messages:inbox' %}">Messages</a></li>
+                        <li><a href="{% url 'users:edit_profile' %}">Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-user"></span> Sign Up / Login</a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+            </nav>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h2>Review your stay</h2>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="upcoming col-lg-6">
+                                        <h3>Review {{host_review.user.first_name}} as a host</h3>
+                                        {% if review %}
+                                        <h4>Your review</h4>
+                                        <p>Rating: {{review.rating}}</p>
+                                        <p>Message: {{review.content}}</p>
+                                        {% else %}
+                                        <form action="{% url 'users:host_review' host_review.user.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="rated_by" value="{{User.id}}">
+                                            <label for="rating">Rating</label>
+                                            <select name="rating">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <label for="message">Message</label>
+                                            <textarea name="message" class="form-control"></textarea>
+                                            <button type="submit" class="btn btn-default">Submit Review</button>
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                    <div class="upcoming col-lg-6">
+                                        <h3>Review {{place.name}} as a location</h3>
+                                        {% if review %}
+                                        <h4>Your review</h4>
+                                        <p>Rating: {{place_review.rating}}</p>
+                                        <p>Message: {{place_review.content}}</p>
+                                        {% else %}
+                                        <form action="{% url 'users:place_review' place.id %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="rated_by" value="{{User.id}}">
+                                                <label for="rating">Rating</label>
+                                                <select name="rating">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select><br>
+                                                <label for="message">Message</label>
+                                                <textarea name="message" class="form-control"></textarea>
+                                                <button type="submit" class="btn btn-default">Submit Review</button>
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Registration</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
+    <script src="{% static 'users/javascript/custom.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'users:home' %}">WebSiteName</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                        <li><a href="{% url 'locations:home' %}">Search</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                        {% if User.id != None %}
+                        <li><a href="{% url 'users:home' %}">Host</a></li>
+                        <li><a href="{% url 'users:trips' %}">Trips</a></li>
+                        <li><a href="{% url 'messages:inbox' %}">Messages</a></li>
+                        <li><a href="{% url 'users:home' %}">Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-user"></span> Sign Up / Login</a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+            </nav>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-login">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h2>{{place.name}}</h2>
+                                    <p><a href="{% url 'users:profile' place.host.user.id %}">View Hosts Profile</a></p>
+                                    <a href="#">Reviews</a> /
+                                    <a href="#">Host</a> /
+                                    <a href="#">Location</a> 
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row">
+                                <div class="col-lg-8">
+                                    <p>{{place.host.user.first_name}} {{place.host.user.last_name}}</p>
+                                    <p>{{place.place_type}}</p>
+                                    <p>{{place.shared}}</p>
+                                    <p>{{place.rooms}}</p>
+                                    <p>{{place.guests}}</p>
+                                    <p>{{place.beds}}</p>
+                                    <p>{{place.baths}}</p>
+                                    <p>{{place.private_bath}}</p>
+                                    <ul>
+                                        <p>Amenities:</p>
+                                    {% for item in amenities %}
+                                        <li>{{item.name}}</li>
+                                    {% endfor %}
+                                    </ul>
+                                    <p>{{place.country}}</p>
+                                    <p>{{place.street_address}}</p>
+                                    <p>{{place.apt_number}}</p>
+                                    <p>{{place.city}}</p>
+                                    <p>{{place.zip}}</p>
+                                    <p>{{place.price}}</p>
+                                    <p>{{place.desc}}</p>
+                                    <p>{{place.host.created_at}}</p>
+                                    <hr>
+                                    <div class="reviews">
+                                        <h4>Reviews</h4>
+                                        {% for review in reviews %}
+                                        <p>Rating: {{review.rating}}</p>
+                                        <p>{{review.content}} -{{review.rated_by.first_name}}</p>
+                                        <hr>
+                                        {% endfor%}
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h3>Book your trip</h3>
+                                    <form action="{% url 'locations:book' place.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="date" name="startdate" class="form-control">
+                                        <input type="date" name="enddate" class="form-control">
+                                        <label for="guests">Guests:</label>
+                                        <select name="guests">
+                                            {% for i in guests %}
+                                                <option value="{{i}}">{{i}}</option>
+                                            {% endfor %}
+                                        </select><br />
+                                        <button type="submit" class="btn btn-default"> Book</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
