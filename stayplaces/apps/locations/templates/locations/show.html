@@ -11,13 +11,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
     <script src="{% static 'users/javascript/custom.js' %}"></script>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400,400|Ubuntu:300" rel="stylesheet" type="text/css">    
 </head>
 <body>
     <div class="container">
             <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'users:home' %}">WebSiteName</a>
+                        <a class="navbar-brand" href="{% url 'users:home' %}">Airbnb</a>
                         </div>
                         <ul class="nav navbar-nav">
                         <li><a href="{% url 'locations:home' %}">Search</a></li>
@@ -51,8 +52,8 @@
                             <hr>
                         </div>
                         <div class="panel-body">
-                           <div class="row">
-                                <div class="col-lg-8">
+                           <div class="row" style="text-align: center">
+                                <div class="col-lg-12">
                                     <p>{{place.host.user.first_name}} {{place.host.user.last_name}}</p>
                                     <p>{{place.place_type}}</p>
                                     <p>{{place.shared}}</p>
@@ -62,7 +63,6 @@
                                     <p>{{place.baths}}</p>
                                     <p>{{place.private_bath}}</p>
                                     <ul>
-                                        <p>Amenities:</p>
                                     {% for item in amenities %}
                                         <li>{{item.name}}</li>
                                     {% endfor %}
@@ -75,30 +75,6 @@
                                     <p>{{place.price}}</p>
                                     <p>{{place.desc}}</p>
                                     <p>{{place.host.created_at}}</p>
-                                    <hr>
-                                    <div class="reviews">
-                                        <h4>Reviews</h4>
-                                        {% for review in reviews %}
-                                        <p>Rating: {{review.rating}}</p>
-                                        <p>{{review.content}} -{{review.rated_by.first_name}}</p>
-                                        <hr>
-                                        {% endfor%}
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <h3>Book your trip</h3>
-                                    <form action="{% url 'locations:book' place.id %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="date" name="startdate" class="form-control">
-                                        <input type="date" name="enddate" class="form-control">
-                                        <label for="guests">Guests:</label>
-                                        <select name="guests">
-                                            {% for i in guests %}
-                                                <option value="{{i}}">{{i}}</option>
-                                            {% endfor %}
-                                        </select><br />
-                                        <button type="submit" class="btn btn-default"> Book</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>

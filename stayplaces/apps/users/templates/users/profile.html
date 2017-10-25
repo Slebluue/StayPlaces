@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
     <script src="{% static 'users/javascript/custom.js' %}"></script>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400,400|Ubuntu:300" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="container">
@@ -83,14 +84,9 @@
                                     {% endfor %}
                                     {% endif %}
                                 </div>
-                                {% if Profile_host %}
                                 <div class="col-lg-6">
-                                    <h3>{{Profile.first_name}}'s reviews</h3>
-                                    {% for review in reviews %}
-                                    <p>{{review.content}} -{{review.rated_by.first_name}} </p>
-                                    {% endfor %}
+                                    
                                 </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>

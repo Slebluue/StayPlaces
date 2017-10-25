@@ -1,6 +1,52 @@
-.error{
+/* .error{
     color: red;
 }
+html, body {
+	height: 100%;
+	background: none, url('../images/blue_city.jpg') rgb(255, 255, 255);
+	background-repeat: repeat, repeat;
+	background-size: cover, cover;
+	background-position: center center, center center;
+	background-attachment: scroll, scroll;
+	font: 400 1.563em/1.38 Montserrat;
+	color: #ffffff;
+  }
+.container-fluid {
+	position: relative;
+	float: left;
+	z-index: 0;
+	width: 80%;
+	height: 62px;
+	margin: -3px 0 0 10%;
+}
+.navbar-inverse {
+		background-color: transparent;
+		border-color: transparent;
+	}
+.navbar-brand, .navbar-inverse {
+	display: block;
+	position: relative;
+	float: left;
+	z-index: 1;
+	/* margin: -42px 0 0 16.33073%; */
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+	font-size: 0.88em;
+	font-weight: 700;
+	text-align: left;
+	color: #ff5a5f;
+  }
+.navbar-header {
+	position: relative;
+	/* float: left; */
+	z-index: 0;
+	width: 1140px;
+	height: 61px;
+	position: relative;
+	min-height: 50px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	/* margin: -3px 0 0 10%; */
+  }
 .panel-login {
     border-color: #ccc;
 	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
@@ -144,4 +190,105 @@
     -webkit-border-radius:6px 0 6px 6px;
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
+} */
+
+.error{
+    color: red;
 }
+body, html {
+	height: 100%;
+	background: none, url('../images/blue_city.jpg') rgb(255, 255, 255);
+	background-repeat: repeat, repeat;
+	background-size: cover, cover;
+	background-position: center center, center center;
+	background-attachment: scroll, scroll;
+	font: 400 1.563em/1.38 Montserrat;
+	color: #ffffff;
+  }
+/* html, body {
+	height: 100%;
+	background: none, url('../images/blue_city.jpg') rgb(255, 255, 255);
+	background-repeat: repeat, repeat;
+	background-size: cover, cover;
+	background-position: center center, center center;
+	background-attachment: scroll, scroll;
+	font: 400 1.563em/1.38 Montserrat;
+	color: #ffffff;
+  } */
+
+/*header*/ 
+.navbar-inverse, .container-fluid{ 
+	position: relative;
+	float: left;
+	z-index: 0;
+	width: 1140px;
+	height: 62px;
+	
+}
+.navbar-brand{
+	display: block;
+	position: relative;
+	z-index: 1;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+	font-size: 0.88em;
+	font-weight: 700;
+	text-align: left;
+}
+.navbar-inverse .navbar-brand {
+	color: #ff5a5f;
+}
+.navbar-inverse {
+	background-color: transparent;
+	border-color: transparent;
+}
+.searchbar {
+    display: inline;
+    position: relative;
+	/* float: left; */
+	top: -9px;
+    z-index: 2;
+    height: 27px;
+    padding: 0 10px;
+    background-color: #ffffff;
+    font-size: 0.52em;
+    color: rgb(0, 0, 0);
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	float: left;
+	z-index: 6;
+	height: 27px;
+	border-radius: 3px;
+	font-size: 0.64em;
+	text-align: center;
+	color: #ffffff;
+  }
+  .maintext {
+	position: relative;
+	float: left;
+	clear: both;
+	z-index: 10;
+	/* margin: -670px 0 0 15.19921875%; */
+	font-size: 1.7em;
+	line-height: 1.88;
+	color: rgb(255, 255, 255);
+  }
+  .smallertext {
+	position: relative;
+	float: left;
+	z-index: 11;
+	/* margin: -614px 0 0 15.19921875%; */
+	font: 300 1em/0.88 Ubuntu;
+	color: rgb(204, 204, 204);
+  }
+  
+  .smallertext p {
+	margin-bottom: 1em;
+  }
+  .btn-default {
+	  background-color: transparent;
+	  border-color: transparent;
+	  
+  }
+  
+  

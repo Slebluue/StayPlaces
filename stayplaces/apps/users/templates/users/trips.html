@@ -10,6 +10,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400,400|Ubuntu:300" rel="stylesheet" type="text/css">
     <script src="{% static 'users/javascript/custom.js' %}"></script>
 </head>
 <body>
@@ -17,7 +18,7 @@
             <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'users:home' %}">WebSiteName</a>
+                        <a class="navbar-brand" href="{% url 'users:home' %}">Airbnb</a>
                         </div>
                         <ul class="nav navbar-nav">
                         <li><a href="{% url 'locations:home' %}">Search</a></li>
@@ -57,34 +58,8 @@
                             <hr>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="upcoming col-lg-12">
-                                        <h3>Upcoming Trips</h3>
-                                        {% if upcoming %}
-                                        {% for trip in upcoming %}
-                                        <a href="{% url 'locations:show' trip.place.id %}">
-                                        <div class="col-sm-3" style="border: 1px solid">
-                                                <p>{{trip.place.name}}</p>
-                                        </div>
-                                        </a>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                    <div class="upcoming col-lg-12">
-                                        <h3>Past Trips</h3>
-                                        {% if past %}
-                                        {% for trip in past %}
-                                        <a href="{% url 'locations:show' trip.place.id %}">
-                                        <div class="col-sm-3" style="border: 1px solid">
-                                        <p>{{trip.place.name}}</p>
-                                        <p><a href="{% url 'users:review' trip.id %}">Review your stay!</a></p>
-                                        </div>
-                                        </a>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
+                            <div class="row" style="text-align: center">
+                                <div class="col-lg-12"></div>
                             </div>
                         </div>
                     </div>
