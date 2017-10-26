@@ -18,7 +18,7 @@
             <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'users:home' %}">Airbnb</a>
+                        <a class="navbar-brand" href="{% url 'users:home' %}">StayPlaces</a>
                         </div>
                         <ul class="nav navbar-nav">
                         <input id="search" type="text" class="form-control searchbar"
@@ -65,13 +65,14 @@
                                     {% if User.id == message.sender_id  %}
                                         <p style="text-align:right">{{message.content}}<br> -{{message.host.first_name}}</p>
                                     {% else %}
-                                    <p style="text-align:left">{{message.content}}<br> -{{message.guest.first_name}}</p>
+                                        <p style="text-align:left">{{message.content}}<br> -{{message.guest.first_name}}</p>
                                     {% endif %}
                                     {% endfor %}
                                     <form action="{% url 'messages:hostconversation' User.id %}" style="text-align: right" method="post">
                                         {% csrf_token %}
                                         <textarea name="message" class="form-control"></textarea>
                                         <button type="submit">Reply</button>
+                                        <input class="mytext" placeholder="Type a message"/>
                                     </form>
                                 </div>
                             </div>
