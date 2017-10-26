@@ -46,6 +46,52 @@ class UserManager(models.Manager):
             user = self.get(email=email)
             return (True, user)
 
+    def edit_validator(self, postData, fileData, user):
+        errors = []
+
+        #Post data variables
+        first_name = postData['first_name']
+        last_name = postData['last_name']
+        email = postData['email'].lower()
+        location = postData['location']
+        desc = postData['desc']
+        gender = postData['gender']
+        phone = postData['phone']
+        match = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
+
+        try:
+            image = fileData['image']
+            print 'This worked'
+        except:
+            print 'this didnt work'
+            image = None
+
+        #Basic validations for register
+        if len(email) < 1 or len(first_name) < 1 or len(last_name) < 1:
+            errors.append('Please fill out all fields')
+        if any(char.isdigit() for char in first_name) or any(char.isdigit() for char in last_name):
+            errors.append('No numbers in name fields')
+        if match == None:
+            errors.append('Email is not valid!')
+
+        #Checking if email is already taken
+        if len(self.filter(email=email)) > 0 and email != user.email:
+            errors.append('email already taken')
+
+        if len(errors):
+            return (False, errors)
+        else:
+            #Success and edit new user
+            user = self.get(email=email)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.email = email
+            user.image = image
+            user.location = location
+            user.desc = desc
+            user.gender = gender
+            user.save()
+            return (True, user)
 
     # LOGIN VALIDATION
     def login_validator(self, postData):
@@ -82,6 +128,10 @@ class User(models.Model):
     birthday = models.CharField(max_length=255, blank=True)
     username = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    image = models.FileField(upload_to='media/%Y/%m/%d',null=True, blank=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=255, blank=True, null=True)
+    gender = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     

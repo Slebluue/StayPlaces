@@ -237,23 +237,20 @@ def edit_profile(request):
         return render(request , "users/edit.html", context)
     else:
         return render(request , "users/edit.html")
-
-def upload(request):
-    user = User.objects.get(id = request.session['id'])
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
-        user.photo = myfile
-        user.save
-        return redirect('/')    
+  
 
 def edit(request, id):
-    first_name = request.POST['first_name']
-    last_name = request.POST['last_name']
-    gender = request.POST['gender']
-    email = request.POST['email']
-    phone = request.POST['phone']
-    location = request.POST['location']
-    desc = request.POST['desc']
+    if request.method == "POST":
+        #Validation in models.py AND creates user if no errors
+        user = User.objects.get(id = request.session['id'])
+        valid, response = User.objects.edit_validator(request.POST, request.FILES, user)
+        if valid:
+            print "successful edit"
+            return redirect('/users/edit')
+        else:
+            for message in response:
+                messages.error(request, message)
+            return redirect('/users/edit')
     
 
 
