@@ -98,7 +98,7 @@ html, body {
 	border-color: #ccc;
 }
 .btn-login {
-	background-color: #59B2E0;
+	background-color: #ff5a5f;
 	outline: none;
 	color: #fff;
 	font-size: 14px;
@@ -106,30 +106,13 @@ html, body {
 	font-weight: normal;
 	padding: 14px 0;
 	text-transform: uppercase;
-	border-color: #59B2E6;
 }
 .btn-login:hover,
 .btn-login:focus {
-	color: #fff;
-	background-color: #53A3CD;
-	border-color: #53A3CD;
-}
-.btn-register {
-	background-color: #1CB94E;
-	outline: none;
-	color: #fff;
-	font-size: 14px;
-	height: auto;
-	font-weight: normal;
-	padding: 14px 0;
-	text-transform: uppercase;
-	border-color: #1CB94A;
-}
-.btn-register:hover,
-.btn-register:focus {
-	color: #fff;
-	background-color: #1CA347;
-	border-color: #1CA347;
+	color: #ff5a5f;
+	background-color: #fff;
+	border-color: #ff5a5f;
+	border: 1px solid;
 }
 .btn-welcome{
 	width: 100%;
@@ -285,9 +268,15 @@ body, html {
 	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
   }
+  .nav li a:hover{
+	  color: #ff5a5f!important;
+  }
   .nav li:hover{
 	  cursor: pointer;
   }
   li.open a{
 	background-color: transparent!important;
+  }
+  .dropdown-menu{
+	  top: 150%!important
   }

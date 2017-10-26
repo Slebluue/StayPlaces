@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
     <script src="{% static 'users/javascript/custom.js' %}"></script>
     <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400,400|Ubuntu:300" rel="stylesheet" type="text/css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik&libraries=places&callback=initAutocomplete" async defer></script> 
 </head>
 <body>
     <div class="container">
@@ -21,7 +22,8 @@
                         <a class="navbar-brand" href="{% url 'users:home' %}">Airbnb</a>
                         </div>
                         <ul class="nav navbar-nav">
-                        <input class="searchbar" placeholder="Search" type="text">
+                        <input id="search" type="text" class="form-control searchbar"
+                        placeholder="Enter a location">
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                         {% if User.id != None %}
