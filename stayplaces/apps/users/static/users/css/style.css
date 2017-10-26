@@ -60,12 +60,15 @@ html, body {
 }
 .panel-login>.panel-heading a{
 	text-decoration: none;
-	color: #fff;
-	font-weight: bold;
+	color: black;
+	/* font-weight: bold; */
 	font-size: 18px;
 	-webkit-transition: all 0.1s linear;
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
+	position: relative;
+	top: 18px;
+    left: 19%;
 }
 .panel-login>.panel-heading a.active{
 	font-size: 22px;
@@ -82,7 +85,7 @@ html, body {
 	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
-	height: 45px;
+	height: 35px;
 	border: 1px solid #ddd;
 	font-size: 16px;
 	-webkit-transition: all 0.1s linear;
@@ -280,3 +283,66 @@ body, html {
   .dropdown-menu{
 	  top: 150%!important
   }
+
+  /*----------- PROFILE FONTS & STYLING -------------------*/
+  
+.col-md-12 {
+	width: 62%;
+	position: relative;
+    left: 18%;
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 600;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+	font-size: 65%;
+}
+
+select {
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+    border-width: 1px;
+    border-style: solid;
+    border-color: initial;
+    border-image: initial;
+}
+
+.btn-default {
+    color: rgb(51, 51, 51);
+    background-color: rgb(255, 255, 255);
+	border-color: rgb(204, 204, 204);
+	font-weight: bold;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 25px;
+    line-height: inherit;
+}
+
+h2{
+	font-size: 30px;
+	position: relative;
+	font-weight: 600;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+
+input[type=file] {
+    display: block;
+    position: relative;
+	left: 25%;
+	width: 334px;
+}
+p {
+	margin: 0 0 10px;
+	text-align: left;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+    font-size: 95%;
+}
