@@ -14,19 +14,34 @@
 </head>
 <body>
     <div class="container">
-            <nav class="navbar navbar-inverse">
+            <<nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                        <a class="navbar-brand" href="/">friendsRfun.com</a>
+                        <a class="navbar-brand" href="{% url 'users:home' %}">Airbnb</a>
                         </div>
                         <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        {% if User.id != None %}
-                        <li><a href="{% url 'users:friends' %}">Dashboard</a></li>
-                        {% endif %}
+                        <input class="searchbar" placeholder="Search" type="text">
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/"><span class="glyphicon glyphicon-user"></span> Sign Up / Login</a></li>
+                        {% if User.id != None %}
+                        <li><a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Host</a>
+                            <span class="caret"></span>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                {% if Host %}
+                                <li><a href="{% url 'users:host' %}">Create new listing</a></li>
+                                <li><a href="{% url 'users:listing' User.id %}">My Listings</a></li>
+                                {% else %}
+                                <li><a href="{% url 'users:host' %}">Become a host</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'users:trips' %}" class="trips_tab" >Trips</a></li>
+                        <li><a href="{% url 'messages:inbox' %}">Messages</a></li>
+                        <li><a href="{% url 'users:edit_profile' %}">Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-user"></span> Sign Up / Login</a></li>
+                        {% endif %}
                         </ul>
                     </div>
             </nav>

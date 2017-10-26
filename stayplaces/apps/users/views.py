@@ -30,9 +30,11 @@ def index(request):
             'Host': host,
         }
         return render(request , "users/index.html", context)
-
     else:
-        return render(request , "users/index.html")
+        context = {
+            'Places': places,
+        }
+        return render(request , "users/index.html", context)
 
 def listing(request, id):
     user = User.objects.get(id=id)

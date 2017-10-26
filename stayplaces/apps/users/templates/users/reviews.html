@@ -17,14 +17,14 @@
             <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                        <a class="navbar-brand" href="{% url 'users:home' %}">WebSiteName</a>
+                        <a class="navbar-brand" href="{% url 'users:home' %}">Airbnb</a>
                         </div>
                         <ul class="nav navbar-nav">
-                        <li><a href="{% url 'locations:home' %}">Search</a></li>
+                        <input class="searchbar" placeholder="Search" type="text">
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                         {% if User.id != None %}
-                        <li><a class="btn btn-default dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Host</a>
+                        <li><a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Host</a>
                             <span class="caret"></span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 {% if Host %}
@@ -35,7 +35,7 @@
                                 {% endif %}
                             </ul>
                         </li>
-                        <li><a href="{% url 'users:trips' %}">Trips</a></li>
+                        <li><a href="{% url 'users:trips' %}" class="trips_tab" >Trips</a></li>
                         <li><a href="{% url 'messages:inbox' %}">Messages</a></li>
                         <li><a href="{% url 'users:edit_profile' %}">Profile</a></li>
                         <li><a href="{% url 'users:logout' %}">Logout</a></li>

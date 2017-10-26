@@ -48,29 +48,27 @@ html, body {
 	/* margin: -3px 0 0 10%; */
   }
 .panel-login {
-    border-color: #ccc;
+	border-color: #ccc;
+	background: rgba(209,211,211, 0.2);
 	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
 .panel-login>.panel-heading {
-	color: #00415d;
-	background-color: #fff;
 	border-color: #fff;
 	text-align:center;
 }
 .panel-login>.panel-heading a{
 	text-decoration: none;
-	color: #666;
+	color: #fff;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	-webkit-transition: all 0.1s linear;
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
 .panel-login>.panel-heading a.active{
-	color: #029f5b;
-	font-size: 18px;
+	font-size: 22px;
 }
 .panel-login>.panel-heading hr{
 	margin-top: 10px;
@@ -116,16 +114,6 @@ html, body {
 	background-color: #53A3CD;
 	border-color: #53A3CD;
 }
-.forgot-password {
-	text-decoration: underline;
-	color: #888;
-}
-.forgot-password:hover,
-.forgot-password:focus {
-	text-decoration: underline;
-	color: #666;
-}
-
 .btn-register {
 	background-color: #1CB94E;
 	outline: none;
@@ -191,6 +179,11 @@ html, body {
     -moz-border-radius:6px 0 6px 6px;
     border-radius:6px 0 6px 6px;
 } */
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+	background-color: transparent!important;
+	cursor: pointer;
+}
+
 
 .error{
     color: red;
@@ -205,22 +198,12 @@ body, html {
 	font: 400 1.563em/1.38 Montserrat;
 	color: #ffffff;
   }
-/* html, body {
-	height: 100%;
-	background: none, url('../images/blue_city.jpg') rgb(255, 255, 255);
-	background-repeat: repeat, repeat;
-	background-size: cover, cover;
-	background-position: center center, center center;
-	background-attachment: scroll, scroll;
-	font: 400 1.563em/1.38 Montserrat;
-	color: #ffffff;
-  } */
 
 /*header*/ 
 .navbar-inverse, .container-fluid{ 
 	position: relative;
 	float: left;
-	z-index: 0;
+	z-index: 10;
 	width: 1140px;
 	height: 62px;
 	
@@ -263,22 +246,20 @@ body, html {
 	text-align: center;
 	color: #ffffff;
   }
+
+
+  /*------------------------ CHRIS CSS ---------------------*/
   .maintext {
 	position: relative;
-	float: left;
-	clear: both;
-	z-index: 10;
-	/* margin: -670px 0 0 15.19921875%; */
 	font-size: 1.7em;
-	line-height: 1.88;
+	line-height: 1.2;
 	color: rgb(255, 255, 255);
   }
   .smallertext {
 	position: relative;
-	float: left;
-	z-index: 11;
+	line-height: 1.2;
 	/* margin: -614px 0 0 15.19921875%; */
-	font: 300 1em/0.88 Ubuntu;
+	font: 300 1em/1.2 Ubuntu;
 	color: rgb(204, 204, 204);
   }
   
@@ -292,3 +273,21 @@ body, html {
   }
   
   
+
+
+  /*----------- MITCHELL CSS -------------------*/
+
+  /*Home Page*/
+  .listings{
+	border-color: #ccc;
+	background: rgba(209,211,211, 0.2);
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+  }
+  .nav li:hover{
+	  cursor: pointer;
+  }
+  li.open a{
+	background-color: transparent!important;
+  }

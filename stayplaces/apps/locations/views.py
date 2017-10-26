@@ -36,6 +36,20 @@ def show(request, id):
             'reviews': reviews
         }
         return render(request , "locations/show.html", context)
+    else:
+        user = None
+        place = Place.objects.get(id = id)
+        amenities = place.amenities.all()
+        reviews = place.reviews.all()
+        guests = range(place.guests)
+        context = {
+            'User': user,
+            'place': place,
+            'amenities': amenities,
+            'guests': guests,
+            'reviews': reviews
+        }
+        return render(request , "locations/show.html", context)
 
 def book(request,id):
     user = User.objects.get(id = request.session['id'])
