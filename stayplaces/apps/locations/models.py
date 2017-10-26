@@ -92,6 +92,9 @@ class Place(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
+    def __unicode__(self):
+        return unicode(self.geocode)
+
     #Add UserManager functionality to user.objects
     objects = LocationManager()
     

@@ -6,16 +6,24 @@ from models import Place, Trip
 import bcrypt
 import re
 from datetime import datetime
+import googlemaps
+gmaps = googlemaps.Client(key='AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik')
+
 #------------------------ LOGIN CODE --------------------------#
 # Load home page
 def index(request):
     if 'id' in request.session:
         user = User.objects.get(id = request.session['id'])
         places = Place.objects.all()
-        
+        search = request.session['geocode']
+        filtered = []
+        for place in places:
+            if place.city in search:
+                filtered.append(place)
+
         context = {
             'User': user, 
-            'places': places,
+            'places': filtered,
         }
         return render(request , "locations/index.html", context)
     else:
@@ -57,6 +65,15 @@ def show(request, id):
             'reviews': reviews
         }
         return render(request , "locations/show.html", context)
+
+def search(request):
+    search = request.POST['search']
+    print search
+    geocode = gmaps.geocode(search)
+    request.session['geocode'] = search
+    return redirect('/s')
+
+    
 
 def book(request,id):
     user = User.objects.get(id = request.session['id'])
