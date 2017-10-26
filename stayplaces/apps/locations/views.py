@@ -28,12 +28,19 @@ def show(request, id):
         amenities = place.amenities.all()
         reviews = place.reviews.all()
         guests = range(place.guests)
+
+        if hasattr(user, 'host'):
+            host = True
+        else:
+            host = False
+        
         context = {
             'User': user, 
             'place': place,
             'amenities': amenities,
             'guests': guests,
-            'reviews': reviews
+            'reviews': reviews,
+            'Host': host
         }
         return render(request , "locations/show.html", context)
     else:
