@@ -55,8 +55,8 @@
                                 <div class="col-xs-6">
                                     <a href="#" class="active" id="login-form-link">Login</a>
                                 </div>
-                                <div class="col-xs-6">
-                                    <a href="#" id="register-form-link">Register</a>
+                                <div class="col-xs-6, col-sm-3">
+                                    <a href="#" class="register" id="register-form-link">Register</a>
                                 </div>
                             </div>
                             <hr>
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3, col-sm-10">
                     <ul class="errors">
                         {% for message in messages %}
                             <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
