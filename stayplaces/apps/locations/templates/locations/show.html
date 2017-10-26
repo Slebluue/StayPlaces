@@ -65,6 +65,11 @@
                         <div class="panel-body">
                            <div class="row" style="text-align: center">
                                 <div class="col-lg-8">
+                                    {% if place.image %}
+                                        <img src="/media/{{place.image}}" class="place-image"/>
+                                    {% else %}
+                                    <img src="{% static 'users/images/default_house.png' %}" class="place-image"/>
+                                    {% endif %}
                                         <p>{{place.host.user.first_name}} {{place.host.user.last_name}}</p>
                                         <p>{{place.place_type}}</p>
                                         <p>{{place.shared}}</p>
@@ -116,9 +121,7 @@
                                             <a href="{% url 'users:login' %}" class="btn btn-default">Sign up to book this place!</a>
                                             {% endif %}
                                         </form>
-
                                     </div>
-                                    
                             </div>
                         </div>
                     </div>

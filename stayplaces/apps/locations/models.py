@@ -3,6 +3,60 @@ from django.db import models
 from ..users.models import User, Host
 from datetime import date, datetime
 # Create your models here.
+class LocationManager(models.Manager):
+    #REGISTER VALIDATION
+    def loaction_register_validator(self, postData, fileData, user):
+        errors = []
+
+        #Post data variables
+        name = postData['name']
+        desc = postData['desc']
+        place_type = postData['place_type']
+        shared = postData['shared']
+        rooms = postData['rooms']
+        guests = postData['guests']
+        beds = postData['beds']
+        baths = postData['baths']
+        private_bath = postData['private_bath']
+        country = postData['country']
+        street_address = postData['street_address']
+        apt_number = postData['apt_number']
+        city = postData['city']
+        state = postData['state']
+        zip = postData['zip']
+        price = postData['price']
+        amenities = postData.getlist('amenities')
+
+        #Basic validations for register
+        if len(name) < 1 or len(desc) < 1 or len(price) < 1 or len(street_address) < 1 or len(city) < 1 or len(zip) < 1:
+            errors.append('Please fill out all fields')
+        if len(zip) > 5:
+            errors.append('Please enter valid zipcode')
+
+        try:
+            image = fileData['image']
+            print 'This worked'
+        except:
+            print 'this didnt work'
+            image = None
+            errors.append('Image upload did not work')
+
+        if len(errors):
+            return (False, errors)
+        else:
+            #Success set hashed pw and create new user
+            if len(Host.objects.filter(user = user)) == 0:
+                Host.objects.create(user = user)
+                host = Host.objects.get(user = user)
+            else:
+                host = Host.objects.get(user = user)
+
+            self.create(name=name, host=host, place_type=place_type, shared=shared, rooms=rooms, guests=guests,beds=beds, baths=baths, private_bath=private_bath, country=country, street_address=street_address, apt_number=apt_number, city=city, zip=zip, price=price, image=image)
+            current_place = self.get(street_address = street_address)
+            for a in amenities:
+                Amenity.objects.create(name = a, place = current_place)
+            return (True, current_place)
+
 
 class Place(models.Model):
     name = models.CharField(max_length=255)
@@ -13,18 +67,21 @@ class Place(models.Model):
     guests = models.IntegerField(blank=False)
     beds = models.IntegerField(blank=False)
     baths = models.IntegerField(blank=False)
-    private_bath = models.BooleanField(default=False)
+    private_bath = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     street_address = models.CharField(max_length=255)
-    apt_number = models.IntegerField(blank=True)
+    apt_number = models.IntegerField(blank=True, null=True)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zip = models.IntegerField(blank=False)
     price = models.IntegerField(blank=False)
     desc = models.CharField(max_length=255, null=True, blank=True)
+    image = models.FileField(upload_to='media/%Y/%m/%d',null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-    
+
+    #Add UserManager functionality to user.objects
+    objects = LocationManager()
     
 class Amenity(models.Model):
     name = models.CharField(max_length=255)

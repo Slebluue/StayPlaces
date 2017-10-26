@@ -62,7 +62,11 @@
                         <div class="panel-body">
                             <div class="row" style="text-align: center">
                                 <div class="col-lg-6">
-                                    <img src="/media/{{Profile.image}}" />
+                                    {% if Profile.image %}
+                                    <img src="/media/{{Profile.image}}" class="profile-image"/>
+                                    {% else %}
+                                    <img src="{% static 'users/images/default.png' %}" class="profile-image"/>
+                                    {% endif %}
                                     <p>Name: {{Profile.first_name}} {{Profile.last_name}}</p>
                                     <p>Username: {{Profile.username}}</p>
                                     

@@ -39,43 +39,16 @@ def index(request):
 def listing(request, id):
     user = User.objects.get(id=id)
     if request.method == "POST":
-        name = request.POST['name']
-        place_type = request.POST['place_type']
-        shared = request.POST['shared']
-        rooms = request.POST['rooms']
-        guests = request.POST['guests']
-        beds = request.POST['beds']
-        baths = request.POST['baths']
-        private_bath = request.POST['private_bath']
-        country = request.POST['country']
-        street_address = request.POST['street_address']
-        apt_number = request.POST['apt_number']
-        city = request.POST['city']
-        state = request.POST['state']
-        zip = request.POST['zip']
-        price = request.POST['price']
-        amenities = request.POST.getlist('amenities')
-
-
-        if private_bath == "Yes":
-            private_bath = True
+        #Validation in models.py AND creates user if no errors
+        valid, response = Place.objects.loaction_register_validator(request.POST, request.FILES, user)
+        if valid:
+            print "successful edit"
+            return redirect('/hosting/'+id)
         else:
-            private_bath = False
+            for message in response:
+                messages.error(request, message)
+            return redirect('/hosting')
 
-        if len(Host.objects.filter(user = user)) == 0:
-            Host.objects.create(user = user)
-            host = Host.objects.get(user = user)
-        else:
-            host = Host.objects.get(user = user)
-
-        Place.objects.create(name=name, host=host, place_type=place_type, shared=shared, rooms=rooms, guests=guests,beds=beds, baths=baths, private_bath=private_bath, country=country, street_address=street_address, apt_number=apt_number, city=city, zip=zip, price=price)
-        
-        current_place = Place.objects.get(street_address = street_address)
-        for a in amenities:
-            Amenity.objects.create(name = a, place = current_place)
-
-        return redirect("/")
-            
     else:
         user = User.objects.get(id = request.session['id'])
         host = user.host
