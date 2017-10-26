@@ -285,12 +285,7 @@ body, html {
   }
 
   /*----------- PROFILE FONTS & STYLING -------------------*/
-  
-.col-md-12 {
-	width: 62%;
-	position: relative;
-    left: 18%;
-}
+
 label {
     display: inline-block;
     max-width: 100%;

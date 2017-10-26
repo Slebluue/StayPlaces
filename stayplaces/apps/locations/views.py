@@ -16,6 +16,11 @@ def index(request):
         user = User.objects.get(id = request.session['id'])
         places = Place.objects.all()
         search = request.session['geocode']
+        geocode = gmaps.geocode(search)
+        geocode = geocode[0]
+        lat = lat = geocode['geometry']['location']['lat']
+        long = lng = geocode['geometry']['location']['lng']
+        
         filtered = []
         for place in places:
             if place.city in search:
@@ -24,6 +29,8 @@ def index(request):
         context = {
             'User': user, 
             'places': filtered,
+            'lat':lat,
+            'long':long,
         }
         return render(request , "locations/index.html", context)
     else:
@@ -68,7 +75,6 @@ def show(request, id):
 
 def search(request):
     search = request.POST['search']
-    print search
     geocode = gmaps.geocode(search)
     request.session['geocode'] = search
     return redirect('/s')
