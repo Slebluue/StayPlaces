@@ -2,6 +2,10 @@ from __future__ import unicode_literals
 from django.db import models
 from ..users.models import User, Host
 from datetime import date, datetime
+import googlemaps
+from jsonfield import JSONField
+gmaps = googlemaps.Client(key='AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik')
+
 # Create your models here.
 class LocationManager(models.Manager):
     #REGISTER VALIDATION
@@ -20,7 +24,6 @@ class LocationManager(models.Manager):
         private_bath = postData['private_bath']
         country = postData['country']
         street_address = postData['street_address']
-        apt_number = postData['apt_number']
         city = postData['city']
         state = postData['state']
         zip = postData['zip']
@@ -34,12 +37,19 @@ class LocationManager(models.Manager):
             errors.append('Please enter valid zipcode')
 
         try:
-            image = fileData['image']
-            print 'This worked'
+            geocode = gmaps.geocode(street_address+', '+city+', '+state)
+            geocode = geocode[0]
+            # print geocode
+            lat = geocode['geometry']['location']['lat']
+            lng = geocode['geometry']['location']['lng']
         except:
-            print 'this didnt work'
+            print "Not a valid address"
+            errors.append('Please enter a valid address')
+
+        try:
+            image = fileData['image']
+        except:
             image = None
-            errors.append('Image upload did not work')
 
         if len(errors):
             return (False, errors)
@@ -51,7 +61,7 @@ class LocationManager(models.Manager):
             else:
                 host = Host.objects.get(user = user)
 
-            self.create(name=name, host=host, place_type=place_type, shared=shared, rooms=rooms, guests=guests,beds=beds, baths=baths, private_bath=private_bath, country=country, street_address=street_address, apt_number=apt_number, city=city, zip=zip, price=price, image=image)
+            self.create(name=name, host=host, place_type=place_type, shared=shared, rooms=rooms, guests=guests,beds=beds, baths=baths, private_bath=private_bath, country=country, street_address=street_address, city=city, zip=zip, price=price, image=image, geocode=geocode, long_position = lng, lat_position = lat)
             current_place = self.get(street_address = street_address)
             for a in amenities:
                 Amenity.objects.create(name = a, place = current_place)
@@ -70,13 +80,15 @@ class Place(models.Model):
     private_bath = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     street_address = models.CharField(max_length=255)
-    apt_number = models.IntegerField(blank=True, null=True)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     zip = models.IntegerField(blank=False)
     price = models.IntegerField(blank=False)
     desc = models.CharField(max_length=255, null=True, blank=True)
     image = models.FileField(upload_to='media/%Y/%m/%d',null=True, blank=True)
+    geocode = JSONField(null=True, blank=True)
+    long_position = models.DecimalField (max_digits=11, decimal_places=7, null=True, blank=True)
+    lat_position = models.DecimalField (max_digits=11, decimal_places=7, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
