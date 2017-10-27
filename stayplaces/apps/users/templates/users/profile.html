@@ -22,16 +22,21 @@
             <nav class="navbar navbar-inverse">
                     <div class="container-fluid">
                         <div class="navbar-header">
+                        <!-- <img class="airbnblogo" src="images/airbnb-logo-belo.png"> -->
                         <a class="navbar-brand" href="{% url 'users:home' %}">StayPlaces</a>
                         </div>
                         <ul class="nav navbar-nav">
-                        <input id="search" type="text" class="form-control searchbar"
-                        placeholder="Enter a location">
+                        <!-- <li><a href="{% url 'locations:home' %}">Search</a></li> -->
+                        <form action="{% url 'locations:search' %}" method='post'>
+                                {% csrf_token %}
+                            <input id="search" type="text" name="search" class="form-control searchbar"
+                            placeholder="Enter a location">
+                            <button type="submit" class="btn btn-default hidden">Search</button>
+                        </form>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                         {% if User.id != None %}
-                        <li><a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Host</a>
-                            <span class="caret"></span>
+                        <li><a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Host <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 {% if Host %}
                                 <li><a href="{% url 'users:host' %}">Create new listing</a></li>
