@@ -14,7 +14,7 @@ from django.utils import timezone
 
 # Load home page
 def index(request):
-    places = Place.objects.all()
+    places = Place.objects.all().order_by('-created_at')
     if 'id' in request.session:
         #Get Logged in User
         user = User.objects.get(id = request.session['id'])
@@ -273,3 +273,8 @@ def login(request):
 def logout(request):
     del request.session['id']
     return redirect("/")
+
+def remove(request, id):
+    place = Place.objects.get(id = id)
+    place.delete()
+    return redirect('/')

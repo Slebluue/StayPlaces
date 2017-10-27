@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login and Registration</title>
+    <title>StayPlaces</title>
     {% load static %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -82,7 +82,7 @@
                                         <h2>{{place.name}}</h2>
                                         <p>{{place.place_type}} &middot; {{place.city}} &middot; Rating: {{avg}} </p>
                                         <p>Price: <span class="price">${{place.price}}</span> per night</p>
-                                        <p>Rooms: {{place.rooms}} &middot; Beds: {{place.beds}} &middot; Baths: {{place.baths}}</p>
+                                        <p>Rooms: {{place.rooms}} &middot; Beds: {{place.beds}} &middot; Baths: {{place.baths}} &middot; Guests: {{place.guests}}</p>
                                         <p>Contact Host: <a href="{% url 'users:profile' place.host.user.id %}"><span class="price">{{place.host.user.first_name}} &rarr;</span></a></p>
                                         <p>{{place.description}}</p>
                                     </div>

@@ -45,7 +45,7 @@ def show(request, id):
         place = Place.objects.get(id = id)
         amenities = place.amenities.all()
         reviews = place.reviews.all()
-        guests = range(place.guests)
+        guests = range(place.guests  + 1)
 
         try:
             reviews_avg =  place.reviews.aggregate(avg = Avg('rating'))
@@ -104,3 +104,4 @@ def book(request,id):
     print end_date
     print guests
     return redirect ("/s/rooms/"+id)
+

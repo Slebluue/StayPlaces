@@ -55,7 +55,7 @@ $(function() {
             
         })
         $('.owl-carousel').owlCarousel({
-            loop: $('.owl-carousel .item').size() > 1 ? true:false,
+            loop: $('.owl-carousel .item').size() > 3 ? true:false,
             margin:20,
             autoplay:true,
             autoplayTimeout:3000,

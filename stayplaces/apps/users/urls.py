@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^trips/review/place/(?P<id>\d+)$', views.place_review, name="place_review"),
     url(r'^hosting$', views.hosting, name="host"),
     url(r'^hosting/(?P<id>\d+)$', views.listing, name="listing"),
+    url(r'^hosting/remove/(?P<id>\d+)$', views.remove, name="remove"),
     url(r'^users/show/(?P<id>\d+)$', views.profile, name="profile"),
     url(r'^users/edit$', views.edit_profile, name="edit_profile"),
     url(r'^users/edit/(?P<id>\d+)$', views.edit, name="edit"),

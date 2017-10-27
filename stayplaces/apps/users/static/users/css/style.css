@@ -309,7 +309,8 @@ body, html {
   }
   .inbox-pic{
 	max-width: 50%;
-    border-radius: 50%;
+	border-radius: 50%;
+
   }
   .messages-row{
 	  margin: 20px 0;
