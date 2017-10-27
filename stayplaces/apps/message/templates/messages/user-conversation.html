@@ -73,7 +73,7 @@
                                     {% for message in conversation %}
                                     {% if User.id != message.sender_id  %}
                                     <div class="right col-sm-8 ">
-                                            <div class="col-sm-2" style="text-align: center">
+                                            <div class="col-sm-2" style="text-align: left">
                                                     {% if message.host.image %}
                                                     <img src="/media/{{message.host.image}}" class="inbox-pic" />
                                                     {% else %}
@@ -91,7 +91,7 @@
                                                     <p style="text-align:right">{{message.content}}</p>
                                                     <p style="text-align:right; font-size:14px;">{{message.created_at}}</p>
                                                 </div>
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-2" style="text-align:right">
                                                         {% if message.guest.image %}
                                                         <img src="/media/{{message.guest.image}}" class="inbox-pic" />
                                                         {% else %}

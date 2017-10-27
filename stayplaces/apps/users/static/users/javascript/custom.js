@@ -36,7 +36,7 @@ $(function() {
 
         //Owl Carousel
         $('#owl-carousel').owlCarousel({
-            loop:true,
+            loop:$('#owl-carousel .item').size() > 1 ? true:false,
             margin:20,
             autoplay:true,
             autoplayTimeout:3000,
@@ -52,9 +52,10 @@ $(function() {
                     items:4
                 }
             }
+            
         })
         $('.owl-carousel').owlCarousel({
-            loop:true,
+            loop: $('.owl-carousel .item').size() > 1 ? true:false,
             margin:20,
             autoplay:true,
             autoplayTimeout:3000,
@@ -71,6 +72,13 @@ $(function() {
                 }
             }
         })
+
+        $('a').click(function(){
+            $('html, body').animate({
+                scrollTop: $( $(this).attr('href') ).offset().top
+            }, 500);
+            return false;
+        });
     });
 
 

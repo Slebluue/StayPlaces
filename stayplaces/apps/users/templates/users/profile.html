@@ -62,7 +62,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h2>Welcome to your Profile</h2>
+                                    <h2>{{Profile.first_name}}'s Profile</h2>
                                 </div>
                             </div>
                             <hr>
@@ -77,7 +77,6 @@
                                     {% endif %}
                                     <p>Name: {{Profile.first_name}} {{Profile.last_name}}</p>
                                     <p>Username: {{Profile.username}}</p>
-                                    
                                     <p>Profile: {% if Profile.desc %}{{Profile.desc}}{% endif %}</p>
                                     
                                     {% if Profile_host %}
@@ -92,10 +91,27 @@
                                     {% endif %}
                                 </div>
                                 {% if Profile_host %}
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="text-align: left">
                                     <h3>{{Profile.first_name}}'s reviews</h3>
+                                    <h3>Overall Rating: {{avg}}</h3>
                                     {% for review in reviews %}
-                                    <p>{{review.content}} -{{review.rated_by.first_name}} </p>
+                                    <div class="left col-sm-12">
+                                            <div class="col-sm-2">
+                                                <a href="{% url 'users:profile' review.rated_by.id %}" />
+                                                    {% if review.rated_by.image %}
+                                                    <img src="/media/{{review.rated_by.image}}"  class="rating-image"/>
+                                                    {% else %}
+                                                    <img src="{% static 'users/images/default.png' %}" class="rating-image"/>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-10" style="text-align: center">
+
+                                                <p style="text-align:left">{{review.content}}<br>Rating: {{review.rating}}</p>
+                                                <p style="text-align:left; font-size:14px;">
+                                                    {{review.rated_by.first_name}} {{review.rated_by.last_name}}<br/>{{review.created_at}}</p>
+                                            </div>
+                                    </div>
                                     {% endfor %}
                                 </div>
                                 {% endif %}

@@ -3,6 +3,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.utils.crypto import get_random_string
 from models import User, Host, Host_Review
 from ..locations.models import Place, Amenity, Trip, Place_Review
+from django.db.models import Avg
 import bcrypt
 import re
 from datetime import datetime, date
@@ -169,8 +170,14 @@ def profile(request, id):
         except:
             places = None
             reviews = None
-        print places
+
+        try:
+            reviews_avg =  profile.host.reviews.aggregate(avg = Avg('rating'))
+            reviews_avg = round(reviews_avg['avg'],1)
+        except:
+            reviews_avg = "No reviews yet"
         #Check if logged in user is host
+        
         if hasattr(user, 'host'):
             host_log = True
         else:
@@ -188,7 +195,8 @@ def profile(request, id):
             'Profile': profile,
             'Profile_host': profile_host ,
             'Places': places,
-            'reviews': reviews
+            'reviews': reviews,
+            'avg': reviews_avg
         }
         return render(request , "users/profile.html", context)
     else:

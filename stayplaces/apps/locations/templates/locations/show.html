@@ -61,12 +61,11 @@
                     <div class="panel panel-login">
                         <div class="panel-heading">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div id="place-head" class="col-lg-12">
                                     <h2>{{place.name}}</h2>
-                                    <p><a href="{% url 'users:profile' place.host.user.id %}">View Hosts Profile</a></p>
-                                    <a href="#">Reviews</a> /
-                                    <a href="#">Host</a> /
-                                    <a href="#">Location</a> 
+                                    <a href="#reviews">Reviews</a> /
+                                    <a href="{% url 'users:profile' place.host.user.id %}">Host</a> /
+                                    <a href="#amenities">Amenities</a> 
                                 </div>
                             </div>
                             <hr>
@@ -77,46 +76,61 @@
                                     {% if place.image %}
                                         <img src="/media/{{place.image}}" class="place-image"/>
                                     {% else %}
-                                    <img src="{% static 'users/images/default_house.png' %}" class="place-image"/>
+                                    <img src="{% static 'users/images/default_house.jpg' %}" class="place-image"/>
                                     {% endif %}
-                                        <p>{{place.host.user.first_name}} {{place.host.user.last_name}}</p>
-                                        <p>{{place.place_type}}</p>
-                                        <p>{{place.shared}}</p>
-                                        <p>{{place.rooms}}</p>
-                                        <p>{{place.guests}}</p>
-                                        <p>{{place.beds}}</p>
-                                        <p>{{place.baths}}</p>
-                                        <p>{{place.private_bath}}</p>
-                                        <ul>
-                                            <p>Amenities:</p>
-                                        {% for item in amenities %}
-                                            <li>{{item.name}}</li>
-                                        {% endfor %}
+                                    <div class="overview">
+                                        <h2>{{place.name}}</h2>
+                                        <p>{{place.place_type}} &middot; {{place.city}} &middot; Rating: {{avg}} </p>
+                                        <p>Price: <span class="price">${{place.price}}</span> per night</p>
+                                        <p>Rooms: {{place.rooms}} &middot; Beds: {{place.beds}} &middot; Baths: {{place.baths}}</p>
+                                        <p>Contact Host: <a href="{% url 'users:profile' place.host.user.id %}"><span class="price">{{place.host.user.first_name}} &rarr;</span></a></p>
+                                        <p>{{place.description}}</p>
+                                    </div>
+                                    <hr>
+                                    <div id="amenities" class="amenities">
+                                        <h2>Amenities</h2>
+                                        <ul class="double">
+                                            {% for item in amenities %}
+                                                <li>{{item.name}}</li>
+                                            {% endfor %}
                                         </ul>
-                                        <p>{{place.country}}</p>
-                                        <p>{{place.street_address}}</p>
-                                        <p>{{place.apt_number}}</p>
-                                        <p>{{place.city}}</p>
-                                        <p>{{place.zip}}</p>
-                                        <p>{{place.price}}</p>
-                                        <p>{{place.desc}}</p>
-                                        <p>{{place.host.created_at}}</p>
-                                        <hr>
-                                        <div class="reviews">
-                                            <h4>Reviews</h4>
-                                            {% for review in reviews %}
-                                            <p>Rating: {{review.rating}}</p>
-                                            <p>{{review.content}} -{{review.rated_by.first_name}}</p>
-                                            <hr>
-                                            {% endfor%}
+                                    <div style="clear:both"></div>
+                                    </div> 
+                                    <hr>
+                                    <div id="reviews" class="reviews">
+                                        <h2>Reviews</h2>
+                                        <h4>Overall Rating: {{avg}}</h4>
+                                        {% for review in reviews %}
+                                        <div class="left col-sm-12">
+                                                <div class="col-sm-2">
+                                                    <a href="{% url 'users:profile' review.rated_by.id %}" />
+                                                        {% if review.rated_by.image %}
+                                                        <img src="/media/{{review.rated_by.image}}"  class="rating-image"/>
+                                                        {% else %}
+                                                        <img src="{% static 'users/images/default.png' %}" class="rating-image"/>
+                                                        {% endif %}
+                                                    </a>
+                                                </div>
+                                                <div class="col-sm-10" style="text-align: center">
+    
+                                                    <p style="text-align:left">{{review.content}}<br>Rating: {{review.rating}}</p>
+                                                    <p style="text-align:left; font-size:14px;">
+                                                        {{review.rated_by.first_name}} {{review.rated_by.last_name}}<br/>{{review.created_at}}</p>
+                                                </div>
                                         </div>
+                                        {% endfor%}
+                                    </div>
+                                    <hr>
                                     </div>
                                     
                                     <div class="col-sm-4">
-                                        <h3>Book your trip</h3>
-                                        <form action="{% url 'locations:book' place.id %}" method="post">
+                                        <div class="book left">
+                                        <h2>Book your trip</h2>
+                                        <form action="{% url 'locations:book' place.id %}" method="post" style="text-align: left">
                                             {% csrf_token %}
+                                            <label for="startdate" >Start Date:</label>
                                             <input type="date" name="startdate" class="form-control">
+                                            <label for="enddate" style="text-align: left">End Date:</label>
                                             <input type="date" name="enddate" class="form-control">
                                             <label for="guests">Guests:</label>
                                             <select name="guests">
@@ -125,11 +139,12 @@
                                                 {% endfor %}
                                             </select><br />
                                             {% if User %}
-                                            <button type="submit" class="btn btn-default"> Book</button>
+                                            <button type="submit" class="btn btn-login"> Book</button>
                                             {% else %}
-                                            <a href="{% url 'users:login' %}" class="btn btn-default">Sign up to book this place!</a>
+                                            <a href="{% url 'users:login' %}" class="btn btn-login">Sign up to book this place!</a>
                                             {% endif %}
                                         </form>
+                                        </div>
                                     </div>
                             </div>
                         </div>

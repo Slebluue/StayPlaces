@@ -6,6 +6,7 @@ from models import Place, Trip
 import bcrypt
 import re
 from datetime import datetime
+from django.db.models import Avg
 import googlemaps
 gmaps = googlemaps.Client(key='AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik')
 
@@ -46,6 +47,14 @@ def show(request, id):
         reviews = place.reviews.all()
         guests = range(place.guests)
 
+        try:
+            reviews_avg =  place.reviews.aggregate(avg = Avg('rating'))
+            reviews_avg = round(reviews_avg['avg'],1)
+        except:
+            reviews_avg = "No reviews yet"
+        
+        print reviews_avg
+
         if hasattr(user, 'host'):
             host = True
         else:
@@ -57,7 +66,8 @@ def show(request, id):
             'amenities': amenities,
             'guests': guests,
             'reviews': reviews,
-            'Host': host
+            'Host': host,
+            'avg':reviews_avg
         }
         return render(request , "locations/show.html", context)
     else:

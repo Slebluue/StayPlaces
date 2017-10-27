@@ -76,9 +76,9 @@
                                     <form action="{% url 'users:edit' User.id %}" method="post" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" style="text-align: center;">
                                             {% if User.image %}
-                                            <img src="/media/{{User.image}}" />
+                                            <img src="/media/{{User.image}}" class="profile-image"/>
                                             {% else %}
                                             <img src="{% static 'users/images/default.png' %}" />
                                             {% endif %}

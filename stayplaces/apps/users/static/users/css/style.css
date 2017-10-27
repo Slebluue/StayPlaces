@@ -303,7 +303,7 @@ body, html {
 	  font-weight: 100;
 	  font-size: 16px;
   }
-  .place_content .price{
+  .place_content .price, .price{
 	  font-size: 20px;
 		color: #ff5a5f;
   }
@@ -342,6 +342,50 @@ body, html {
   .listing-page{
 	  height: 375px;
 	  margin-bottom: 20px;
+  }
+  .profile-image{
+	border-radius: 50%;
+    width: 50%;
+  }
+  .rating-image{
+	border-radius: 50%;
+	position: relative;
+	top: 15px;
+  }
+  .overview p{
+	  font-size: 17px;
+	  text-align: left;
+  }
+  .overview a{
+	  text-decoration: none;
+  }
+  .overview h2, .amenities h2, .reviews h2, .book h2{
+	  font-weight: 100;
+	  font-size: 42px;
+  }
+  .book h2, .book label{
+	  color: #343434;
+	  text-shadow: none;
+	  font-weight: 100;
+  }
+  .double li  {width:50%;float: left;font-size: 18px;}
+  .double{
+	  list-style-type: none;
+  }
+  .book{
+	  padding: 10px;
+  }
+
+  .book button{
+	  width: 100%;
+  }
+  #place-head a{
+	  color: #ffffff;
+	  top: 0;
+	  left: 0;
+  }
+  #place-head a:hover{
+	color: #ff5a5f;
   }
   /*----------- PROFILE FONTS & STYLING -------------------*/
 
