@@ -403,3 +403,12 @@ button, input, select, textarea {
     line-height: inherit;
     color: black;
 }
+.amenities {
+    position: absolute;
+    top: 0%;
+    left: 99%;
+    width: 100%;
+    font-size: 33px;
+    font-weight: 600;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}

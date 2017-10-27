@@ -69,7 +69,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12, col-xs-6">
                                     <form action="{% url 'users:listing' User.id %}" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <label for="name">Title for listing</label>
@@ -416,7 +416,9 @@
                                         <label for="zip">ZIP Code</label>
                                         <input type="text" name="zip" class="form-control">
                                         <!-- AMMENITITES -->
-                                        <label for="amenities">What amenities do you offer?</label><br>
+                                        <!-- Hello -->
+                                        <div class="amenities col-lg-12, col-xs-6"> 
+                                        <h2 for="amenities">What amenities do you offer?</h2><br>
                                         <input type="checkbox" name="amenities" name="Essentials"  value="Essentials">Essentials</input><br>
                                         <input type="checkbox" name="amenities" name="WiFi" value="Wifi">WiFi</input><br>
                                         <input type="checkbox" name="amenities" name="Shampoo" value="Shampoo">Shampoo</input><br>
@@ -449,5 +451,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>
