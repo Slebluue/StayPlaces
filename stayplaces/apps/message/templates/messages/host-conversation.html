@@ -70,14 +70,21 @@
                                                 <p style="text-align:right; font-size:14px;">{{message.created_at}}</p>
                                             </div>
                                             <div class="col-sm-2" style="text-align: center">
+                                                {% if message.host.image %}
                                                 <img src="/media/{{message.host.image}}" class="inbox-pic" />
+                                                {% else %}
+                                                <img src="{% static 'users/images/default.png' %}" class="inbox-pic"/>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     {% else %}
                                     <div class="left col-sm-8">
                                             <div class="col-sm-2">
-                                                <img src="/media/{{message.guest.image}}" class="inbox-pic" />
-                                                
+                                                    {% if message.guest.image %}
+                                                    <img src="/media/{{message.guest.image}}" class="inbox-pic" />
+                                                    {% else %}
+                                                    <img src="{% static 'users/images/default.png' %}" class="inbox-pic"/>
+                                                    {% endif %}
                                             </div>
                                             <div class="col-sm-10" style="text-align: center">
                                                 <p style="text-align:left">{{message.content}}</p>

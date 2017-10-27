@@ -66,10 +66,14 @@
                                     {% if guest_list %}
                                     {% for guest in guest_list %}
                                     <a href="{% url 'messages:userconversation' guest.id %}">
-                                    <div class="row messages-row">
-                                        <div class="col-sm-2" style="text-align:center;">
-                                            <img src="/media/{{guest.host.image}}" class="inbox-pic" />
-                                        </div>
+                                    <div class="row messages-row" style="text-align:center;">
+                                            <div class="col-sm-2">
+                                                    {% if guest.host.image %}
+                                                    <img src="/media/{{guest.host.image}}" class="inbox-pic" />
+                                                    {% else %}
+                                                    <img src="{% static 'users/images/default.png' %}" class="inbox-pic"/>
+                                                    {% endif %}
+                                            </div>
                                         <div class="col-sm-10">
                                             <p>{{guest.messages.last.created_at}}</p>
                                             <p class="message">{{guest.messages.last.content}}</p>
@@ -85,7 +89,11 @@
                                     <a href="{% url 'messages:hostconversation' conversation.id %}">
                                     <div class="row messages-row">
                                         <div class="col-sm-2" style="text-align:center;">
-                                            <img src="/media/{{conversation.guest.image}}" class="inbox-pic" />
+                                                {% if conversation.guest.image %}
+                                                <img src="/media/{{conversation.guest.image}}" class="inbox-pic" />
+                                                {% else %}
+                                                <img src="{% static 'users/images/default.png' %}" class="inbox-pic"/>
+                                                {% endif %}
                                         </div>
                                         <div class="col-sm-10">
                                             <p>{{conversation.messages.last.created_at}}</p>
