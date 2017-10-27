@@ -103,5 +103,5 @@ def book(request,id):
     print start_date
     print end_date
     print guests
-    return redirect ("/s/rooms/"+id)
+    return redirect ("/trips")
 

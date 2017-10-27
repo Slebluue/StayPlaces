@@ -61,7 +61,7 @@ class LocationManager(models.Manager):
             else:
                 host = Host.objects.get(user = user)
 
-            self.create(name=name, host=host, place_type=place_type, shared=shared, rooms=rooms, guests=guests,beds=beds, baths=baths, private_bath=private_bath, country=country, street_address=street_address, city=city, zip=zip, price=price, image=image, geocode=geocode, long_position = lng, lat_position = lat)
+            self.create(name=name, host=host, place_type=place_type, shared=shared, rooms=rooms, guests=guests,beds=beds, baths=baths, private_bath=private_bath, country=country, street_address=street_address, city=city, zip=zip, price=price, image=image, geocode=geocode, long_position = lng, lat_position = lat, desc=desc)
             current_place = self.get(street_address = street_address)
             for a in amenities:
                 Amenity.objects.create(name = a, place = current_place)
@@ -84,7 +84,7 @@ class Place(models.Model):
     state = models.CharField(max_length=255)
     zip = models.IntegerField(blank=False)
     price = models.IntegerField(blank=False)
-    desc = models.CharField(max_length=255, null=True, blank=True)
+    desc = models.CharField(max_length=500, null=True, blank=True)
     image = models.FileField(upload_to='media/%Y/%m/%d',null=True, blank=True)
     geocode = JSONField(null=True, blank=True)
     long_position = models.DecimalField (max_digits=11, decimal_places=7, null=True, blank=True)

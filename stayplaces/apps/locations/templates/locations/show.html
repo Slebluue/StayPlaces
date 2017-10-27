@@ -84,10 +84,10 @@
                                         <p>Price: <span class="price">${{place.price}}</span> per night</p>
                                         <p>Rooms: {{place.rooms}} &middot; Beds: {{place.beds}} &middot; Baths: {{place.baths}} &middot; Guests: {{place.guests}}</p>
                                         <p>Contact Host: <a href="{% url 'users:profile' place.host.user.id %}"><span class="price">{{place.host.user.first_name}} &rarr;</span></a></p>
-                                        <p>{{place.description}}</p>
+                                        <p>{% if place.desc %}{{place.desc}}{% endif %}</p>
                                     </div>
                                     <hr>
-                                    <div id="amenities" class="amenities">
+                                    <div id="amenities" class="place_amenities">
                                         <h2>Amenities</h2>
                                         <ul class="double">
                                             {% for item in amenities %}

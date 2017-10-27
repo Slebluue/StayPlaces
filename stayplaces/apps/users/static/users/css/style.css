@@ -360,7 +360,7 @@ body, html {
   .overview a{
 	  text-decoration: none;
   }
-  .overview h2, .amenities h2, .reviews h2, .book h2{
+  .overview h2, .place_amenities h2, .reviews h2, .book h2{
 	  font-weight: 100;
 	  font-size: 42px;
   }
