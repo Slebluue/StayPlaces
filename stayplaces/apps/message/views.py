@@ -40,7 +40,8 @@ def index(request):
 def host_conversation(request, id):
     if request.method ==  "POST":
         user = User.objects.get(id = request.session['id'])
-        conversation = Conversation.objects.get(id = id)
+        host = User.objects.get(id = id)
+        conversation = Conversation.objects.get(host = host)
         host = conversation.host
         guest = conversation.guest
         content = request.POST['message']

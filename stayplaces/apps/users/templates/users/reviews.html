@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
     <script src="{% static 'users/javascript/custom.js' %}"></script>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400,400|Ubuntu:300" rel="stylesheet" type="text/css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik&libraries=places&callback=initAutocomplete" async defer></script> 
 </head>
 <body>
@@ -61,12 +62,12 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="upcoming col-lg-6">
+                                    <div class="upcoming col-lg-6 review">
                                         <h3>Review {{host_review.user.first_name}} as a host</h3>
                                         {% if review %}
-                                        <h4>Your review</h4>
                                         <p>Rating: {{review.rating}}</p>
-                                        <p>Message: {{review.content}}</p>
+                                        <p>Message: </p>
+                                        <h4>{{review.content}}</h4>
                                         {% else %}
                                         <form action="{% url 'users:host_review' host_review.user.id %}" method="post">
                                             {% csrf_token %}
@@ -85,12 +86,12 @@
                                         </form>
                                         {% endif %}
                                     </div>
-                                    <div class="upcoming col-lg-6">
+                                    <div class="upcoming col-lg-6 review">
                                         <h3>Review {{place.name}} as a location</h3>
-                                        {% if review %}
-                                        <h4>Your review</h4>
+                                        {% if place_review %}
                                         <p>Rating: {{place_review.rating}}</p>
-                                        <p>Message: {{place_review.content}}</p>
+                                        <p>Message: </p>
+                                        <h4>{{place_review.content}}</h4>
                                         {% else %}
                                         <form action="{% url 'users:place_review' place.id %}" method="post">
                                                 {% csrf_token %}

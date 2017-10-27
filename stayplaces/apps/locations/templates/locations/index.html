@@ -143,24 +143,36 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h2>Welcome to the Locations page</h2>
+                                    <h2>Search results for: {{city}}</h2>
                                 </div>
                             </div>
                             <hr>
                         </div>
                         <div class="panel-body">
-                           <div class="row" style="text-align: center">
-                                <div class="col-lg-6">
+                           <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="row">
                                     {% for place in places %}
-                                    <div class="col-sm-4" style="border: 1px solid;">
-                                        <p>{{place.name}}</p>
-                                        <p>${{place.price}} / night</p>
-                                        <p>Rooms: {{place.rooms}} / Beds: {{place.beds}} / Baths: {{place.baths}}</p>
-                                    </div>
+                                    <div class="place_content col-sm-4 listing-page"> 
+                                            {% if place.image %}
+                                            <a href="{% url 'locations:show' place.id %}">
+                                                <img src="/media/{{place.image}}" />
+                                            </a>
+                                            {% else %}
+                                            <a href="{% url 'locations:show' place.id %}">
+                                                <img src="{% static 'users/images/default_house.jpg'  %}" />
+                                            </a>
+                                            {% endif %}
+                                            <h4>{{place.place_type}}</h4>
+                                            <a href="{% url 'locations:show' place.id %}"><h2>{{place.name}}</h4></a>
+                                            <p><span class="price">${{place.price}} </span>per night</p>
+                                            <p>Rooms: {{place.rooms}} / Beds: {{place.beds}} / Baths: {{place.baths}}</p>
+                                        </div> 
                                     {% endfor %}
                                 </div>
-                                <div class="col-lg-6">
-                                <div id="map" style="width: 100%;height: 450px"></div>
+                                </div>
+                                <div class="col-lg-5">
+                                <div id="map" style="width: 100%;height: 650px"></div>
                                 <div id="infowindow-content">
                                         <img src="" width="16" height="16" id="place-icon">
                                         <span id="place-name"  class="title"></span><br>

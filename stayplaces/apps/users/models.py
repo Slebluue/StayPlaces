@@ -61,10 +61,11 @@ class UserManager(models.Manager):
 
         try:
             image = fileData['image']
-            print 'This worked'
         except:
-            print 'this didnt work'
-            image = None
+            if user.image:
+                image = user.image
+            else:
+                image = None
 
         #Basic validations for register
         if len(email) < 1 or len(first_name) < 1 or len(last_name) < 1:
@@ -88,6 +89,7 @@ class UserManager(models.Manager):
             user.email = email
             user.image = image
             user.location = location
+            user.phone = phone
             user.desc = desc
             user.gender = gender
             user.save()

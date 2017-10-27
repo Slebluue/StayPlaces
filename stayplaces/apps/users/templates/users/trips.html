@@ -9,9 +9,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
     <link href="http://fonts.googleapis.com/css?family=Montserrat:700,400,400|Ubuntu:300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/owl.theme.default.css' %}" />
     <script src="{% static 'users/javascript/custom.js' %}"></script>
+    <script src="{% static 'users/javascript/owl.carousel.min.js' %}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik&libraries=places&callback=initAutocomplete" async defer></script> 
 </head>
 <body>
@@ -59,30 +62,49 @@
                             <hr>
                         </div>
                         <div class="panel-body">
-                            <div class="row" style="text-align: center">
+                            <div class="row">
                                 <div class="col-lg-12">
                                     <div class="upcoming col-lg-12">
                                         <h3>Upcoming Trips</h3>
                                         {% if upcoming %}
-                                        {% for trip in upcoming %}
-                                        <a href="{% url 'locations:show' trip.place.id %}">
-                                        <div class="col-sm-3" style="border: 1px solid">
-                                                <p>{{trip.place.name}}</p>
-                                        </div>
-                                        </a>
-                                        {% endfor %}
+                                                {% for trip in upcoming %}
+                                                    <div class="place_content col-sm-3"> 
+                                                        {% if trip.place.image %}
+                                                        <a href="{% url 'locations:show' place.id %}">
+                                                            <img src="/media/{{trip.place.image}}" />
+                                                        </a>
+                                                        {% else %}
+                                                        <a href="{% url 'locations:show' trip.place.id %}">
+                                                            <img src="{% static 'users/images/default_house.jpg'  %}" />
+                                                        </a>
+                                                        {% endif %}
+                                                        <h4>{{trip.place.place_type}}</h4>
+                                                        <a href="{% url 'locations:show' trip.place.id %}"><h2>{{trip.place.name}}</h4></a>
+                                                        <a href="{% url 'users:profile' trip.place.host.user.id %}"><p><span class="price">Contact your host:  {{trip.place.host.user.first_name}} &rarr; </span></p></a>
+                                                        <p>Your number of guests: {{trip.guests}}</p>
+                                                    </div>       
+                                                {% endfor %}
                                         {% endif %}
                                     </div>
                                     <div class="upcoming col-lg-12">
                                         <h3>Past Trips</h3>
                                         {% if past %}
                                         {% for trip in past %}
-                                        <a href="{% url 'locations:show' trip.place.id %}">
-                                        <div class="col-sm-3" style="border: 1px solid">
-                                        <p>{{trip.place.name}}</p>
-                                        <p><a href="{% url 'users:review' trip.id %}">Review your stay!</a></p>
+                                        <div class="place_content col-sm-3"> 
+                                                {% if trip.place.image %}
+                                                <a href="{% url 'locations:show' place.id %}">
+                                                    <img src="/media/{{trip.place.image}}" />
+                                                </a>
+                                                {% else %}
+                                                <a href="{% url 'locations:show' trip.place.id %}">
+                                                    <img src="{% static 'users/images/default_house.jpg'  %}" />
+                                                </a>
+                                                {% endif %}
+                                                <h4>{{trip.place.place_type}}</h4>
+                                                <a href="{% url 'locations:show' trip.place.id %}"><h2>{{trip.place.name}}</h4></a>
+                                                <a href="{% url 'users:review' trip.id %}"><p><span class="price">Review your stay! &rarr;</span></p></a>
+                                                <p>Your number of guests: {{trip.guests}}</p>
                                         </div>
-                                        </a>
                                         {% endfor %}
                                         {% endif %}
                                     </div>

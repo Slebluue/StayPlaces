@@ -66,24 +66,34 @@
                                 <div class="col-lg-12">
                                     <form action="{% url 'users:edit' User.id %}" method="post" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <input type="file" name="image">
+                                        <div class="row">
+                                        <div class="col-sm-6">
+                                            {% if User.image %}
+                                            <img src="/media/{{User.image}}" />
+                                            {% else %}
+                                            <img src="{% static 'users/images/default.png' %}" />
+                                            {% endif %}
+                                            <h4>Profile Picture</h4>
+                                            <input type="file" name="image" class="form-control">
+                                        </div>
+                                        </div>
                                         <label>First Name: </label>
                                         <input type="text" class="form-control" name="first_name" value="{{User.first_name}}">
                                         <label>Last Name: </label>
                                         <input type="text" class="form-control" name="last_name" value="{{User.first_name}}">
-                                        <label for="gender">I am: </label>
+                                        <label for="gender">I am: </label><br />
                                         <select name="gender">
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
-                                        </select>
+                                        </select><br />
                                         <label>Email: </label>
                                         <input type="email" class="form-control" name="email" value="{{User.email}}">
                                         <label>Phone: </label>
-                                        <input type="phone" class="form-control" name="phone">
-                                        <label for="location">Where you live: </label>
-                                        <input type="text" class="form-control" name="location">
+                                        <input type="phone" class="form-control" name="phone" value="{% if User.phone %}{{User.phone}}{% endif %}">
+                                        <label for="location" >Where you live: </label>
+                                        <input type="text" class="form-control" name="location" value="{{User.location}}">
                                         <label for="desc">A little about yourself</label>
-                                        <textarea class="form-control" name="desc"></textarea>
+                                        <textarea class="form-control" name="desc">{{User.desc}}</textarea>
                                         <button class="btn btn-default" type="submit">Edit Information</button>
                                     </form>
                                 </div>

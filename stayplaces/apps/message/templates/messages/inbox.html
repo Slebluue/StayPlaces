@@ -66,22 +66,34 @@
                                     {% if guest_list %}
                                     {% for guest in guest_list %}
                                     <a href="{% url 'messages:userconversation' guest.id %}">
-                                    <div style="border: 1px solid">
-                                        <p>{{guest.host.first_name}} {{guest.host.last_name}}</p>
-                                        <p>{{guest.messages.last.content}}</p>
+                                    <div class="row messages-row">
+                                        <div class="col-sm-2" style="text-align:center;">
+                                            <img src="/media/{{guest.host.image}}" class="inbox-pic" />
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <p>{{guest.messages.last.created_at}}</p>
+                                            <p class="message">{{guest.messages.last.content}}</p>
+                                        </div>
                                     </div>
                                     </a>
+                                    <hr>
                                     {% endfor %}
                                     {% endif %}
                                     <h3>Host Messages</h3>
                                     {% if conversation_list %}
                                     {% for conversation in conversation_list %}
                                     <a href="{% url 'messages:hostconversation' conversation.id %}">
-                                        <div style="border: 1px solid">
-                                        <p>{{conversation.guest.first_name}} {{conversation.guest.last_name}}</p>
-                                        <p>{{conversation.messages.last.content}}</p>
+                                    <div class="row messages-row">
+                                        <div class="col-sm-2" style="text-align:center;">
+                                            <img src="/media/{{conversation.guest.image}}" class="inbox-pic" />
                                         </div>
+                                        <div class="col-sm-10">
+                                            <p>{{conversation.messages.last.created_at}}</p>
+                                            <p class="message">{{conversation.messages.last.content}}</p>
+                                        </div>
+                                    </div>
                                     </a>
+                                    <hr>
                                     {% endfor %}
                                     {% endif %}
                                 </div>

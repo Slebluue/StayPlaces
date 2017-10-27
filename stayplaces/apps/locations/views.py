@@ -18,9 +18,10 @@ def index(request):
         search = request.session['geocode']
         geocode = gmaps.geocode(search)
         geocode = geocode[0]
-        lat = lat = geocode['geometry']['location']['lat']
-        long = lng = geocode['geometry']['location']['lng']
-        
+        lat = geocode['geometry']['location']['lat']
+        long = geocode['geometry']['location']['lng']
+        city = geocode['address_components'][0]['long_name']
+        print city
         filtered = []
         for place in places:
             if place.city in search:
@@ -31,6 +32,7 @@ def index(request):
             'places': filtered,
             'lat':lat,
             'long':long,
+            'city': city
         }
         return render(request , "locations/index.html", context)
     else:
