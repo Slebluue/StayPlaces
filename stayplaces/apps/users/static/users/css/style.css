@@ -448,3 +448,31 @@ button, input, select, textarea {
     line-height: inherit;
     color: black;
 }
+.amenities {
+    position: absolute;
+    top: 0%;
+    left: 99%;
+    width: 100%;
+    font-size: 33px;
+    font-weight: 600;
+	text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+input[type=checkbox], input[type=radio] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+	height: 24px;
+	width: 36px;
+}
+/* #host, body, html{
+	height: auto;
+	background: none, url('../images/blue_city.jpg') rgb(255, 255, 255);
+	background-repeat: repeat, repeat;
+	background-size: cover, cover;
+	background-position: center center, center center;
+	background-attachment: scroll, scroll;
+	font: 400 1.563em/1.38 Montserrat;
+	color: #ffffff;
+  }
+} */
