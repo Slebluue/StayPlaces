@@ -69,7 +69,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="row" style="text-align: center">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 overview">
                                     {% if Profile.image %}
                                     <img src="/media/{{Profile.image}}" class="profile-image"/>
                                     {% else %}
@@ -77,15 +77,14 @@
                                     {% endif %}
                                     <p>Name: {{Profile.first_name}} {{Profile.last_name}}</p>
                                     <p>Username: {{Profile.username}}</p>
-                                    <p>Profile: {% if Profile.desc %}{{Profile.desc}}{% endif %}</p>
+                                    <p>{% if Profile.desc %}{{Profile.desc}}{% endif %}</p>
                                     
                                     {% if Profile_host %}
                                     {% if Profile != User %}
-                                    <p>Send a Message</p>
-                                    <form action="{% url 'messages:send' Profile.id %}" method="post">
+                                    <form action="{% url 'messages:send' Profile.id %}" method="post" style="text-align: left">
                                         {% csrf_token %}
                                         <textarea class="form-control" name="message"></textarea>
-                                        <button class="btn btn-default" type="submit">Send {{User.First_name}} a Message</button>
+                                        <button class="btn btn-login"  style="width: 250px" type="submit">Send {{User.first_name}} a Message</button>
                                     </form>
                                     {% endif %}
                                     {% endif %}
