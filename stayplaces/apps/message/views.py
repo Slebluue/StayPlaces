@@ -39,9 +39,8 @@ def index(request):
 
 def host_conversation(request, id):
     if request.method ==  "POST":
+        conversation = Conversation.objects.get(id = id)
         user = User.objects.get(id = request.session['id'])
-        host = User.objects.get(id = id)
-        conversation = Conversation.objects.get(host = host)
         host = conversation.host
         guest = conversation.guest
         content = request.POST['message']
@@ -61,7 +60,7 @@ def host_conversation(request, id):
         if 'id' in request.session:
             #Get Logged in User
             user = User.objects.get(id = request.session['id'])
-        
+            
             # get the specific Guest user conversation
             conversation = Conversation.objects.get(id= id)
             guest = conversation.guest
@@ -69,7 +68,8 @@ def host_conversation(request, id):
                 'User': user,
                 'conversation': conversation.messages.all(),
                 'Host': conversation.host,
-                'Guest': guest
+                'Guest': guest,
+                'conversation_id': id
             }
             return render(request , "messages/host-conversation.html", context)
 
@@ -102,11 +102,14 @@ def user_conversation(request, id):
         
             # get the conversation
             conversation = Conversation.objects.get(id= id)
+            guest = conversation.guest
 
             context = {
                 'User': user,
+                'Guest': guest,
                 'conversation': conversation.messages.all(),
-                'Host': conversation.host
+                'Host': conversation.host,
+                'conversation_id': id
             }
             return render(request , "messages/user-conversation.html", context)
 

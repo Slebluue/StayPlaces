@@ -92,7 +92,7 @@
                                         </div>
                                     {% endif %}
                                     {% endfor %}
-                                    <form action="{% url 'messages:userconversation' Host.id %}" style="text-align: right" method="post">
+                                    <form action="{% url 'messages:userconversation' conversation_id %}" style="text-align: right" method="post">
                                         {% csrf_token %}
                                         <textarea name="message" class="form-control"></textarea>
                                         <button type="submit">Reply</button>
