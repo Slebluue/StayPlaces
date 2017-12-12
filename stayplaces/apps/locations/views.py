@@ -13,21 +13,20 @@ gmaps = googlemaps.Client(key='AIzaSyCjQRMAgIaJyoNrUyhDCT5c470E6AkvDik')
 #------------------------ LOGIN CODE --------------------------#
 # Load home page
 def index(request):
+    places = Place.objects.all()
+    search = request.session['geocode']
+    geocode = gmaps.geocode(search)
+    geocode = geocode[0]
+    lat = geocode['geometry']['location']['lat']
+    long = geocode['geometry']['location']['lng']
+    city = geocode['address_components'][0]['long_name']
+    print city
+    filtered = []
+    for place in places:
+        if place.city in search:
+            filtered.append(place)
     if 'id' in request.session:
         user = User.objects.get(id = request.session['id'])
-        places = Place.objects.all()
-        search = request.session['geocode']
-        geocode = gmaps.geocode(search)
-        geocode = geocode[0]
-        lat = geocode['geometry']['location']['lat']
-        long = geocode['geometry']['location']['lng']
-        city = geocode['address_components'][0]['long_name']
-        print city
-        filtered = []
-        for place in places:
-            if place.city in search:
-                filtered.append(place)
-
         context = {
             'User': user, 
             'places': filtered,
@@ -37,7 +36,13 @@ def index(request):
         }
         return render(request , "locations/index.html", context)
     else:
-        return render(request , "locations/index.html")
+        context = {
+            'places': filtered,
+            'lat':lat,
+            'long':long,
+            'city': city
+        }
+        return render(request , "locations/index.html", context)
 
 def show(request, id):
     if 'id' in request.session:

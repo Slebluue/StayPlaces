@@ -77,7 +77,7 @@
                                     {% endif %}
                                     <p>Name: {{Profile.first_name}} {{Profile.last_name}}</p>
                                     <p>Username: {{Profile.username}}</p>
-                                    <p>{% if Profile.desc %}{{Profile.desc}}{% endif %}</p>
+                                    <p>{% if Profile.desc != None %}{{Profile.desc}}{% endif %}</p>
                                     
                                     {% if Profile_host %}
                                     {% if Profile != User %}
